@@ -166,7 +166,37 @@ namespace ProxyServer
             }
         }
 
-      
+       /*
+        * frmMain_FormClosing() Event
+        * 
+        */
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ProxyThreadListener != null)
+            {
+                ProxyThreadListener.Stop();
+            }
+
+            //Try to save config
+            try
+            {
+                if (!Directory.Exists(CommonDataPath))
+                {
+                    Directory.CreateDirectory(CommonDataPath);
+                }
+                using (StreamWriter sw = new StreamWriter(ConfigInfoPath))
+                {
+                    sw.WriteLine(txtInternalPort.Text);
+                    sw.WriteLine(chkRewriteHostHeaders.Checked);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
+
 
 
 
