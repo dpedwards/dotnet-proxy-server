@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.cmbIPAddress = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,12 +42,13 @@
             // 
             // cmbIPAddress
             // 
+            this.cmbIPAddress.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbIPAddress.FormattingEnabled = true;
-            this.cmbIPAddress.Location = new System.Drawing.Point(12, 25);
+            this.cmbIPAddress.Location = new System.Drawing.Point(11, 25);
             this.cmbIPAddress.Name = "cmbIPAddress";
-            this.cmbIPAddress.Size = new System.Drawing.Size(188, 21);
-            this.cmbIPAddress.TabIndex = 0;
-            this.cmbIPAddress.SelectedIndexChanged += new System.EventHandler(this.cmbIPAddress_SelectedIndexChanged);
+            this.cmbIPAddress.Size = new System.Drawing.Size(189, 21);
+            this.cmbIPAddress.TabIndex = 8;
             // 
             // label1
             // 
@@ -68,11 +70,12 @@
             // 
             // txtExternalPort
             // 
-            this.txtExternalPort.Location = new System.Drawing.Point(12, 65);
+            this.txtExternalPort.Location = new System.Drawing.Point(11, 65);
+            this.txtExternalPort.MaxLength = 7;
             this.txtExternalPort.Name = "txtExternalPort";
-            this.txtExternalPort.Size = new System.Drawing.Size(188, 20);
+            this.txtExternalPort.Size = new System.Drawing.Size(189, 20);
             this.txtExternalPort.TabIndex = 3;
-            this.txtExternalPort.TextChanged += new System.EventHandler(this.txtExternalPort_TextChanged);
+            this.txtExternalPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorts_KeyPress);
             // 
             // label3
             // 
@@ -85,22 +88,24 @@
             // 
             // txtInternalPort
             // 
-            this.txtInternalPort.Location = new System.Drawing.Point(12, 104);
+            this.txtInternalPort.Location = new System.Drawing.Point(11, 104);
+            this.txtInternalPort.MaxLength = 7;
             this.txtInternalPort.Name = "txtInternalPort";
-            this.txtInternalPort.Size = new System.Drawing.Size(188, 20);
+            this.txtInternalPort.Size = new System.Drawing.Size(189, 20);
             this.txtInternalPort.TabIndex = 5;
-            this.txtInternalPort.TextChanged += new System.EventHandler(this.txtInternalPort_TextChanged);
+            this.txtInternalPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorts_KeyPress);
             // 
             // chkRewriteHostHeaders
             // 
             this.chkRewriteHostHeaders.AutoSize = true;
-            this.chkRewriteHostHeaders.Location = new System.Drawing.Point(12, 130);
+            this.chkRewriteHostHeaders.Checked = true;
+            this.chkRewriteHostHeaders.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRewriteHostHeaders.Location = new System.Drawing.Point(13, 131);
             this.chkRewriteHostHeaders.Name = "chkRewriteHostHeaders";
-            this.chkRewriteHostHeaders.Size = new System.Drawing.Size(126, 17);
-            this.chkRewriteHostHeaders.TabIndex = 6;
-            this.chkRewriteHostHeaders.Text = "Rewrite host headers";
+            this.chkRewriteHostHeaders.Size = new System.Drawing.Size(188, 17);
+            this.chkRewriteHostHeaders.TabIndex = 9;
+            this.chkRewriteHostHeaders.Text = "&Rewrite host headers (IIS Express)";
             this.chkRewriteHostHeaders.UseVisualStyleBackColor = true;
-            this.chkRewriteHostHeaders.CheckedChanged += new System.EventHandler(this.chkRewriteHostHeaders_CheckedChanged);
             // 
             // btnStart
             // 
@@ -127,18 +132,22 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(212, 185);
+            this.Controls.Add(this.chkRewriteHostHeaders);
+            this.Controls.Add(this.cmbIPAddress);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtInternalPort);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtExternalPort);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.chkRewriteHostHeaders);
-            this.Controls.Add(this.txtInternalPort);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtExternalPort);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbIPAddress);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "ProxyServer";
-            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Text = "SharpProxy";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
