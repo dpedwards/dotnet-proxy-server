@@ -83,8 +83,8 @@ namespace ProxyServer
                     if (thisAddress == "127.0.0.1")
                         continue;
 
-                    // 192.x.x.x addresses are self-assigned "private network" IP by Windows
-                    if (thisAddress.StartsWith("192"))
+                    // 168.x.x.x addresses are self-assigned "private network" IP by Windows!!!
+                    if (thisAddress.StartsWith("168"))
                     {
                         fallbackIP = thisAddress;
                         continue;
@@ -160,10 +160,12 @@ namespace ProxyServer
                     chkRewriteHostHeaders.Checked = bool.Parse(values[1]);
                 }
             }
-            catch (Exception ex)
-            {
-               throw new Exception(ex.ToString());
-            }
+            //catch (Exception ex)
+            //{
+            //   throw new Exception(ex.ToString());
+            //}
+            catch
+            { }
         }
 
        /*
