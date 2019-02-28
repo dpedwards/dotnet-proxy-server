@@ -227,7 +227,7 @@ namespace ProxyServer
         }
 
        /*
-        * CheckPortRange() to check TCP port range 
+        * CheckPortRange() Method to check TCP port range 
         * 
         * @param port
         * @return true
@@ -239,7 +239,15 @@ namespace ProxyServer
             return true;
         }
 
-
+       /*
+        * ShowError() Function to show specific error message
+        * 
+        * @param msg
+        */
+        private void ShowError(string msg)
+        {
+            MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
 
 
