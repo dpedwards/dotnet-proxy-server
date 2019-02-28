@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
+using System.IO;
+using System.Diagnostics;
 
 namespace ProxyServer
 {
@@ -81,11 +83,103 @@ namespace ProxyServer
                     //throw new Exception(ex.ToString());
                 }
             }
-
-
-
         }
 
+        /*
+         * Proxy() Function 
+         * 
+         * @param arg
+         */
+        protected void Proxy(object arg)
+        {
+            byte[] buffer = new byte[16384];
+            int clientRead = -1;
+            int hostRead = -1;
 
+            long lastTime = DateTime.Now.Ticks;
+
+            try
+            {
+                // Setup connections
+                using (TcpClient client = (TcpClient)arg)
+                using (TcpClient host = new TcpClient())
+                {
+                    host.Connect(new IPEndPoint(IPAddress.Loopback, this.InternalPort));
+
+                    // Setup our streams
+                    using (BinaryReader clientIn = new BinaryReader(client.GetStream()))
+                    using (BinaryWriter clientOut = new BinaryWriter(client.GetStream()))
+                    using (BinaryReader hostIn = new BinaryReader(host.GetStream()))
+                    using (BinaryWriter hostOut = new BinaryWriter(host.GetStream()))
+                    {
+                        // Start funneling data!
+                        while (clientRead != 0 || hostRead != 0 || (DateTime.Now.Ticks - lastTime) <= PROXY_TIMEOUT_TICKS)
+                        {
+                            while (client.Connected && (clientRead = client.Available) > 0)
+                            {
+                                clientRead = clientIn.Read(buffer, 0, buffer.Length);
+
+                                // Rewrite the host header?
+                                if (this.RewriteHostHeaders && clientRead > 0)
+                                {
+                                    string str = Encoding.UTF8.GetString(buffer, 0, clientRead);
+
+                                    int startIdx = str.IndexOf(HTTP_SEPARATOR + "Host:");
+                                    if (startIdx >= 0)
+                                    {
+                                        int endIdx = str.IndexOf(HTTP_SEPARATOR, startIdx + 1, str.Length - (startIdx + 1));
+                                        if (endIdx > 0)
+                                        {
+                                            string replace = str.Substring(startIdx, endIdx - startIdx);
+                                            string replaceWith = HTTP_SEPARATOR + "Host: localhost:" + InternalPort;
+
+                                            Trace.WriteLine("Incoming HTTP header:\n\n" + str);
+
+                                            str = str.Replace(replace, replaceWith);
+
+                                            Trace.WriteLine("Rewritten HTTP header:\n\n" + str);
+
+                                            byte[] strBytes = Encoding.UTF8.GetBytes(str);
+                                            Array.Clear(buffer, 0, buffer.Length);
+                                            Array.Copy(strBytes, buffer, strBytes.Length);
+                                            clientRead = strBytes.Length;
+                                        }
+                                    }
+                                }
+
+                                hostOut.Write(buffer, 0, clientRead);
+                                lastTime = DateTime.Now.Ticks;
+                                hostOut.Flush();
+                            }
+                            while (host.Connected && (hostRead = host.Available) > 0)
+                            {
+                                hostRead = hostIn.Read(buffer, 0, buffer.Length);
+                                clientOut.Write(buffer, 0, hostRead);
+                                lastTime = DateTime.Now.Ticks;
+                                clientOut.Flush();
+                            }
+
+                            // Sleepy time?
+                            if (this.Stopped)
+                                return;
+                            if (clientRead == 0 && hostRead == 0)
+                            {
+                                Thread.Sleep(100);
+                            }
+                        }
+
+                        long waitTime = DateTime.Now.Ticks - lastTime;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: Remove this. Only here to catch breakpoints.
+                bool failed = true;
+
+                // TODO: Uncomment this to throw exception. 
+                //throw new Exception(ex.ToString());
+            }
+        }
     }
 }
