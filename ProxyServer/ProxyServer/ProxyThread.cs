@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace ProxyServer
 {
@@ -49,7 +50,7 @@ namespace ProxyServer
             this.Stopped = false;
             this.Listener = null;
 
-            // initialize thread 'Listen' an run it 
+            // initialize thread 'Listen' and run it 
             new Thread(new ThreadStart(Listen)).Start();
         }
 
@@ -59,6 +60,29 @@ namespace ProxyServer
          */ 
         protected void Listen()
         {
+            Listener = new TcpListener(new IPEndPoint(IPAddress.Any, this.ExternalPort));
+            Listener.Start();
+
+            while (!Stopped)
+            {
+                try
+                {
+                    TcpClient client = Listener.AcceptTcpClient();
+
+                    // Dispatch the thread and continue listening...
+                    new Thread(new ThreadStart(() => Proxy(client))).Start();
+                } 
+                catch (Exception ex)
+                {
+                    // TODO: Remove this. Only here to catch breakpoints.
+                    bool failed = true;
+
+                    // TODO: Uncomment this to throw exception. 
+                    //throw new Exception(ex.ToString());
+                }
+            }
+
+
 
         }
 
