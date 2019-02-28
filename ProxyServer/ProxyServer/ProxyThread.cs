@@ -181,5 +181,19 @@ namespace ProxyServer
                 //throw new Exception(ex.ToString());
             }
         }
+
+       /*
+        * Stop() Method to stop TCP port listener by proxy thread
+        * 
+        */
+        public void Stop()
+        {
+            Stopped = true;
+            if (Listener != null)
+            {
+                Listener.Stop();
+            }
+        }
+
     }
 }
