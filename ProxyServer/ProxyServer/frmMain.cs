@@ -249,7 +249,16 @@ namespace ProxyServer
             MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /*
+         * btnStop_Click() Event 
+         * 
+         */
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            ProxyThreadListener.Stop();
 
+            ToggleButtons();
+        }
 
 
 
