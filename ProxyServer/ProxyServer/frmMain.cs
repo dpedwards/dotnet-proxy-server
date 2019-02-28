@@ -273,6 +273,19 @@ namespace ProxyServer
             chkRewriteHostHeaders.Enabled = !chkRewriteHostHeaders.Enabled;
         }
 
+        /*
+         * txtPorts_KeyPress() Event 
+         * 
+         */
+        private void txtPorts_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnStart_Click(null, null);
+            }
+        }
+
+
 
 
 
