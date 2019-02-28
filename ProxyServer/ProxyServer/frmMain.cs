@@ -260,6 +260,18 @@ namespace ProxyServer
             ToggleButtons();
         }
 
+        /*
+         * ToogleButtons() Function to toggle buttons
+         * 
+         */
+        private void ToggleButtons()
+        {
+            btnStop.Enabled = !btnStop.Enabled;
+            btnStart.Enabled = !btnStart.Enabled;
+            txtExternalPort.Enabled = !txtExternalPort.Enabled;
+            txtInternalPort.Enabled = !txtInternalPort.Enabled;
+            chkRewriteHostHeaders.Enabled = !chkRewriteHostHeaders.Enabled;
+        }
 
 
 
