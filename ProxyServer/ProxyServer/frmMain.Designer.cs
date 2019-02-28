@@ -46,6 +46,7 @@
             this.cmbIPAddress.Name = "cmbIPAddress";
             this.cmbIPAddress.Size = new System.Drawing.Size(188, 21);
             this.cmbIPAddress.TabIndex = 0;
+            this.cmbIPAddress.SelectedIndexChanged += new System.EventHandler(this.cmbIPAddress_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -71,6 +72,7 @@
             this.txtExternalPort.Name = "txtExternalPort";
             this.txtExternalPort.Size = new System.Drawing.Size(188, 20);
             this.txtExternalPort.TabIndex = 3;
+            this.txtExternalPort.TextChanged += new System.EventHandler(this.txtExternalPort_TextChanged);
             // 
             // label3
             // 
@@ -87,6 +89,7 @@
             this.txtInternalPort.Name = "txtInternalPort";
             this.txtInternalPort.Size = new System.Drawing.Size(188, 20);
             this.txtInternalPort.TabIndex = 5;
+            this.txtInternalPort.TextChanged += new System.EventHandler(this.txtInternalPort_TextChanged);
             // 
             // chkRewriteHostHeaders
             // 
@@ -97,6 +100,7 @@
             this.chkRewriteHostHeaders.TabIndex = 6;
             this.chkRewriteHostHeaders.Text = "Rewrite host headers";
             this.chkRewriteHostHeaders.UseVisualStyleBackColor = true;
+            this.chkRewriteHostHeaders.CheckedChanged += new System.EventHandler(this.chkRewriteHostHeaders_CheckedChanged);
             // 
             // btnStart
             // 
@@ -106,6 +110,7 @@
             this.btnStart.TabIndex = 7;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStop
             // 
@@ -115,6 +120,7 @@
             this.btnStop.TabIndex = 8;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // frmMain
             // 

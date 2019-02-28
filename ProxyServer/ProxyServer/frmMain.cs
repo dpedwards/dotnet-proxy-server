@@ -21,5 +21,35 @@ namespace ProxyServer
         {
 
         }
+
+        private void cmbIPAddress_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtExternalPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtInternalPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkRewriteHostHeaders_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
