@@ -139,35 +139,36 @@ namespace ProxyServer
             return true;
         }
 
+       /*
+        * frmMain_Shown() Event 
+        * 
+        */
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            txtInternalPort.Focus();
 
+            //Try to load config
+            try
+            {
+                using (StreamReader sr = new StreamReader(ConfigInfoPath))
+                {
+                    var values = sr.ReadToEnd().Split('\n')
+                                               .Select(x => x.Trim())
+                                               .ToArray();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    txtInternalPort.Text = values[0];
+                    chkRewriteHostHeaders.Checked = bool.Parse(values[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+               throw new Exception(ex.ToString());
+            }
+        }
 
       
+
+
+
     }
 }
