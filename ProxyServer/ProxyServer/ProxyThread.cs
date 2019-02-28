@@ -49,8 +49,18 @@ namespace ProxyServer
             this.Stopped = false;
             this.Listener = null;
 
+            // initialize thread 'Listen' an run it 
+            new Thread(new ThreadStart(Listen)).Start();
         }
 
+        /*
+         * Listen() Method to listen on external port 
+         * 
+         */ 
+        protected void Listen()
+        {
+
+        }
 
 
     }
