@@ -196,6 +196,41 @@ namespace ProxyServer
             }
         }
 
+        /*
+         * btnStart_Click() Event
+         * 
+         *@return ShowError()
+         */
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            int externalPort = 0;
+            int internalPort = 0;
+            //Validation
+            int.TryParse(txtExternalPort.Text, out externalPort);
+            int.TryParse(txtInternalPort.Text, out internalPort);
+            if (!CheckPortRange(externalPort)
+                || !CheckPortRange(internalPort)
+                || externalPort == internalPort)
+            {
+                ShowError("Ports must be between " + MIN_PORT + "-" + MAX_PORT + " and must not be the same.");
+                return;
+            }
+            if (!CheckPortAvailability(externalPort))
+            {
+                ShowError("Port " + externalPort + " is not available, please select a different port.");
+                return;
+            }
+
+            ProxyThreadListener = new ProxyThread(externalPort, internalPort, chkRewriteHostHeaders.Checked);
+
+            ToggleButtons();
+        }
+
+      
+
+
+
+
 
 
 
