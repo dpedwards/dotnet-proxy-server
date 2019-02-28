@@ -226,7 +226,20 @@ namespace ProxyServer
             ToggleButtons();
         }
 
-      
+       /*
+        * CheckPortRange() to check TCP port range 
+        * 
+        * @param port
+        * @return true
+        */
+        private bool CheckPortRange(int port)
+        {
+            if (port < MIN_PORT || port > MAX_PORT)
+                return false;
+            return true;
+        }
+
+
 
 
 
