@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProxyServer
@@ -32,6 +33,23 @@ namespace ProxyServer
 
         private readonly string[] HTTP_SEPARATORS = new string[] { HTTP_SEPARATOR };
         private readonly string[] HTTP_HEADER_BREAKS = new string[] { HTTP_HEADER_BREAK };
+
+        /*
+         * Constructor
+         * 
+         * @param extPort
+         * @param initPort 
+         * @param rewriteHostHeaders
+         */ 
+        public ProxyThread(int extPort, int intPort, bool rewriteHostHeaders)
+        {
+            this.ExternalPort = extPort;
+            this.InternalPort = intPort;
+            this.RewriteHostHeaders = rewriteHostHeaders;
+            this.Stopped = false;
+            this.Listener = null;
+
+        }
 
 
 
