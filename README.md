@@ -64,12 +64,6 @@ project documentation and demo pages can be found in the [`/docs`](docs) if subm
 - [Visual Studio](https://visualstudio.microsoft.com/de/vs/)
 
 
-### Other:
-
-- [NBitcoin](https://github.com/MetacoSA/NBitcoin)
-- [Newtonsoft.Json](https://www.newtonsoft.com/json)
-
-
 ---
 
 ## License
