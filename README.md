@@ -1,7 +1,7 @@
 # [.NET Proxy Server](https://github.com/dpedwards/dotnet-proxy-server)
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/dpedwards/xamarin-mobile-wallet/master/LICENSE)
-[![Xamarin](https://img.shields.io/badge/xamarin-forms-blue.svg)](https://docs.microsoft.com/de-de/xamarin/)
+[![Windows Forms](https://img.shields.io/badge/windows-forms-blue.svg)](https://docs.microsoft.com/en-ca/dotnet/framework/winforms/)
 [![Tip Me via PayPal](https://img.shields.io/badge/PayPal-tip%20me-green.svg?logo=paypal)](https://www.paypal.me/dare2101)
 
 A .NET Proxy Server that handles client requests for resources.
